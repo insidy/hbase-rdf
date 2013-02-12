@@ -47,6 +47,8 @@ public class QueryRunnerSimple extends TableQueryRunnerBase implements TableQuer
 				//Get the row corresponding to the subject
 				Get res = new Get( Bytes.toBytes( sm.toString() ) ) ;
 				sb.append( TableDescSubjects.SUBJECT_TBL_NAME ) ;
+				
+				//System.out.println("Reading table " + sb.toString());
 				HTable table = tables().get( sb.toString() ) ;
 				Result rr = null ; if( table != null ) rr = table.get( res ) ;
 				res = null ;
@@ -60,6 +62,8 @@ public class QueryRunnerSimple extends TableQueryRunnerBase implements TableQuer
 					//Get the row corresponding to the object
 					Get res = new Get( Bytes.toBytes( om.toString() ) ) ;
 					sb.append( TableDescObjects.OBJECT_TBL_NAME ) ;
+					
+					//System.out.println("Reading table " + sb.toString());
 					HTable table = tables().get( sb.toString() ) ;
 					Result rr = null ; if( table != null ) rr = table.get( res ) ;
 					res = null ;
@@ -73,6 +77,8 @@ public class QueryRunnerSimple extends TableQueryRunnerBase implements TableQuer
 						//Get the row corresponding to the predicate
 						Get res = new Get( Bytes.toBytes( pm.toString() ) ) ;
 						sb.append( TableDescPredicates.PREDICATE_TBL_NAME ) ;
+						
+						//System.out.println("Reading table " + sb.toString());
 						HTable table = tables().get( sb.toString() ) ;
 						Result rr = null ; if( table != null ) rr = table.get( res ) ;
 						res = null ;
@@ -87,6 +93,8 @@ public class QueryRunnerSimple extends TableQueryRunnerBase implements TableQuer
 							//Create an iterator over all rows in the subject's HTable
 							Scan scanner = new Scan() ;
 							sb.append( TableDescSubjects.SUBJECT_TBL_NAME ) ;
+							
+							//System.out.println("Reading table " + sb.toString());
 							HTable table = tables().get( sb.toString() ) ;
 							if( table != null ) trIter = new HBaseRdfSingleTableIterator( table.getScanner( scanner ), sm, pm, om, TableDescSimpleCommon.COL_FAMILY_NAME_STR ) ;
 						}
